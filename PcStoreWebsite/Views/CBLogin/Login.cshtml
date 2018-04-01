@@ -1,0 +1,75 @@
+﻿@model PcStoreWebsite.Models.Login
+
+@{
+    ViewBag.Title = "";
+}
+
+<body background="~/Content/electronix/images/logintheme.jpg">
+
+</body>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <font color="red" font size="90">
+            <h4 div style="margin-left: auto; margin-right: auto; text-align: center;">Login</h4>
+            <hr />
+        </font>
+        <font color="white" font size="50">
+            <div class="form-group" div style="margin-left: auto; margin-right: auto; text-align: center; font-size:30px">
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10"> 
+                    @Html.EditorFor(model => model.UserId)
+                </div>
+            </div>
+        </font>
+        <font color="white" font size="50">
+
+            <div class="form-group" div style="margin-left: auto; margin-right: auto; text-align: center; font-size:30px">
+                @Html.LabelFor(model => model.UserPass, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.UserPass)
+                </div>
+            </div>
+
+            </font>
+        <div>
+            <font color="lawngreen" font size="5">
+                <div class="form-group" div style="margin-left: auto; margin-right: auto; text-align: center;">
+                    @Html.ValidationMessageFor(model => model.UserId)
+                    @Html.ValidationMessageFor(model => model.UserPass)
+                </div>
+            </font>
+        </div>
+
+        <!--If User are not admin we send a suitable message.-->
+
+        <p style="text-align:center; color:chartreuse;font-size:25px">@ViewBag.ErrorMessage</p>
+
+            <div class="form-group" div style="margin-left: auto; margin-right: auto; text-align: center;">
+                <div class="col-md-offset-2 col-md-10">
+
+                    <!--<input type="submit" value="Login" style="color:blueviolet" class="btn btn-default" />-->
+
+                    <form action="/UserDefaultPage.cshtml" method="get">
+                        <br />
+                        <button type="submit" formaction="/CBlogin/Login" style="color:deeppink" h2>Login</button>
+                    </form>
+                    <form action="/UserDefaultPage.cshtml" method="get">
+                        <br />
+                        <button type="submit" formaction="/Guest/Ghome" style="color:blue" h2>Access as Guest</button>
+                    </form>
+                    <form action="/UserDefaultPage.cshtml" method="get">
+                        <button type="submit" formaction="/CBLogin/Registration" style="color:deeppink" h2>Sign Up</button>
+                    </form>
+                        
+                </div>
+            </div>
+</div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

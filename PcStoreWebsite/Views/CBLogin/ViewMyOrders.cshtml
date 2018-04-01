@@ -1,0 +1,99 @@
+﻿@model IEnumerable<PcStoreWebsite.Models.Products>
+
+@{
+    ViewBag.Title = "My Orders";
+
+    Layout = "~/Views/Shared/_PcStoreLayout.cshtml";
+
+
+}
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+<!DOCTYPE html>
+
+@if (Model==null)
+{
+    <h2>You have no orders!</h2>
+}
+<style>
+
+    .UsersTbl{
+        align-content:center;
+        text-align:center;
+    }
+</style>
+<html>
+
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>My Orders</title>
+
+
+    <style>
+
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+
+    <div style="background:#ffffff">
+        
+        @Html.Raw(ViewBag.SomeMessage)
+
+
+
+
+        <h4 style="text-align:left;">Here all the products that you have paid.</h4>
+        @*
+        <table id="UsersTbl" class="table" style="width:100%; background:#ffffff">
+
+            
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Speed)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.RAM)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.HardDisk)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Core)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Warrently)
+
+                    </th>
+
+                    <th></th>
+
+
+
+</table>*@
+        @*Here is the Partial View.*@
+        @Html.Partial("ViewOrdersPartial", Model);
+    </div>
+
+
+</body>
+</html>

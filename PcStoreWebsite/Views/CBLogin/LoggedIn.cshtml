@@ -1,0 +1,110 @@
+﻿@model IEnumerable<PcStoreWebsite.Models.Products>
+
+@using System.Threading;
+
+@{
+    ViewBag.Title = "LoggedIn";
+    Layout = "~/Views/Shared/_PcStoreLayout.cshtml";
+}
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    @*If the user at programming catagory.*@
+    @if (Session["Catagory"]!=null && Session["Catagory"].ToString().Equals("Programming"))
+    {
+        <h2 style="text-align:center;color:aqua;">Programmer Products</h2>
+        foreach (var item in Model)
+        {
+            if (item.Category.ToString().Equals("Programming"))
+            {
+                @*Here you have to add a dynamic things.*@
+
+                    int oldprice = item.Price + 400;
+                    <div class="prod_box">
+
+                    <div class="top_prod_box"></div>
+                    <div class="center_prod_box">
+
+                        
+                        @*
+        <div class="product_title"><a href="details.html">@item.ProductName</a></div>
+        <div class="product_img"><a href="details.html"><img src="~/Content/electronix/images/laptop.gif" alt="" border="0" /></a></div>
+
+                        *@
+                    <div class="product_title">@item.ProductName</div>
+                    <div class="product_img"><img src="~/Content/electronix/images/laptop.gif" alt="" border="0" /></div>
+
+                        
+                       @Html.ActionLink("Buy Now", "BuyItem", "CBLogin", new { id=@item.ProductId},null)
+
+                        
+                    <div style="font:bold;" class="prod_price"><span class="reduce">@oldprice ₪</span> <span class="price">@item.Price ₪ <br />Product ID: @item.ProductId</span></div>
+                        </div>
+                        </div>
+
+            }
+        }
+    }
+
+     @*If the user at other catagory.*@
+
+    else if (Session["Catagory"] != null && Session["Catagory"].ToString().Equals("Other"))
+    {
+        <h2 style="text-align:center;color:aqua;">Other Products</h2>
+        foreach (var item in Model)
+        {
+            if (item.Category.ToString().Equals("Other"))
+            {
+                @*Here you have to add a dynamic things.*@
+
+    int oldprice = item.Price + 400;
+    <div class="prod_box">
+
+        <div class="top_prod_box"></div>
+        <div class="center_prod_box">
+            <div class="product_title"><a href="details.html">@item.ProductName</a></div>
+            <div class="product_img"><a href="details.html"><img src="~/Content/electronix/images/laptop.gif" alt="" border="0" /></a></div>
+           
+            @Html.ActionLink("Buy Now", "BuyItem", "CBLogin", new { id = @item.ProductId }, null)
+
+
+            <div style="font:bold;" class="prod_price"><span class="reduce">@oldprice ₪</span> <span class="price">@item.Price ₪<br />Product ID: @item.ProductId</span></div>
+        </div>
+    </div>
+
+            }
+        }
+    }
+                            @*If the user at unknown catagory.*@
+    else
+    {
+        <h2 style="color:red;">There are no available products for you'r specification.</h2>
+    }
+
+
+
+</body>
+</html>

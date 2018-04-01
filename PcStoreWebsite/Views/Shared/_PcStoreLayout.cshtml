@@ -1,0 +1,303 @@
+﻿
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@Page.Title</title>
+    @RenderSection("head", required: false)
+    <title>Pc Store</title>
+    <meta http-equiv="/Content-Type" content="text/html; charset=windows-1252" />
+    <link rel="stylesheet" type="text/css" href=@Url.Content("/Content/electronix/style.css") />
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="iecss.css" />
+    <![endif]-->
+    <script type="text/javascript" src="/Content/electronix/js/boxOver.js"></script>
+</head>
+<body>
+    <div id="main_container">
+        <div class="top_bar">
+           
+
+            <!-- end of oferte_content-->
+
+            <div id="main_content">
+                <div id="menu_tab">
+                    <div class="left_menu_corner"></div>
+                    <ul class="menu">
+                        @if (Session["UserId"] == null)
+                        {
+                            <li><a href="http://localhost:7294/Guest/Ghome" class="nav1">Home</a></li>
+                            <li class="divider"></li>
+
+                        }
+                        else
+                        {
+                            <li><a href="http://localhost:7294/CBLogin/LoggedIn" class="nav1">Home</a></li>
+                            <li class="divider"></li>
+                        }
+                        @if (Session["UserId"] != null)
+                        {
+                        <li><a href="http://localhost:7294/CBLogin/MyProfile" class="nav2">My Profile</a></li>
+                        <li class="divider"></li>
+                        <!--<li><a href="#" class="nav3">My Orders</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" class="nav4">My account</a></li>
+                        <li class="divider"></li>
+                        <<li><a href="#" class="nav4">Sign Up</a></li>
+                        <li class="divider"></li>-->
+                        @*@Html.ActionLink("Contact Us", "ContactUs")*@
+                        }
+                        <li><a href="http://localhost:7294/CBLogin/ContactUs" class="nav4">Contact us</a></li>
+                        <li class="divider"></li>
+                        @if (Session["UserId"] != null)
+                        {             
+                        <li><a href="http://localhost:7294/CBLogin/ViewMyOrders" class="nav6">My Orders</a></li>
+                        <li class="divider"></li>
+                        }
+                        <!--<li><a href="CHECK THIS" class="nav6">Contact Us</a></li>
+                        <li class="divider"></li>-->
+                        <!--if user already login in we have to show them logout.-->
+                        @if (Session["UserId"] != null)
+                        {
+                            if (Session["isAdmin"].ToString().Equals("True"))
+                            {
+                                <!--<li><a href="Index" class="nav6">Manage</a></li>
+                                    <li class="divider"></li>-->
+                                    //@Html.ActionLink("Manage |", "Index")
+                                <li><a href="http://localhost:7294/CBLogin/Index" class="nav1">Manage</a></li>
+                                <li class="divider"></li>
+
+                            }
+                        }
+                        @if (Session["UserId"] != null)
+                        {
+                            <li><a href="http://localhost:7294/CBLogin/Logout" class="nav6">Logout</a></li>
+                            <li class="divider"></li>
+                            <!--
+
+                                <li><a href="Logout" i class="fa fa-sign-out" style="font-size:20px;color:red">Logout</a></li>
+                                <li class="divider"></li>
+                           -->
+                        }
+                        else
+                        {
+                            //For Guest , he can also Login !, or sign UP!
+                            <li><a href="http://localhost:7294" class="nav6">Login</a></li>
+                            <li class="divider"></li>
+                            <li><a href="http://localhost:7294/CBLogin/Registration" class="nav6">Sign Up</a></li>
+                            <li class="divider"></li>
+
+                        }
+                    </ul>
+                    <div class="right_menu_corner"></div>
+                </div>
+                <!-- end of menu tab -->
+                <div style="text-align:left;">
+        @if (Session["UserId"] != null)
+        {
+            if (Session["UserId"].ToString() == "mahdiasali")
+            {
+                        <br />
+
+                        <hr>
+
+                         <p>
+                             <a href="http://localhost:7294/CBLogin/MyProfile">
+
+                                 <img src="~/Content/electronix/images/mahdi.jpg" style="color:cyan;font-size:20px; border-radius:50%;" width="120"
+                                      height="80" align="middle" /> </a> have been registered at 10/01/2018, you have 10 friends
+                                 Studying in SCE Software Engineering.
+</p>
+                        <hr>
+
+
+            }
+            else if (Session["UserId"].ToString() == "Elonav")
+            {
+                        <br />
+
+                        <hr>
+
+                        <p>
+                            <a href="http://localhost:7294/CBLogin/MyProfile">
+
+                                <img src="~/Content/electronix/images/elon.jpg" style="color:cyan;font-size:20px; border-radius:50%;" width="120"
+                                     height="80" align="middle" />
+                            </a>You have been registered at 07/01/2018, you have 20 friends
+                            Studying in SCE Software Engineering.
+                        </p>
+
+
+
+                            <hr>
+            }
+            else
+            {
+                            <br />
+
+                            <hr>
+                        <a href="http://localhost:7294/CBLogin/MyProfile">
+
+                            <img src="~/Content/electronix/images/facebook-avatar.jpg" style="color:cyan;font-size:20px; border-radius:50%;" width="120" />
+                          </a>
+                            <hr>
+            }
+        }
+</div>
+                @if(Session["UserId"]!=null && Convert.ToBoolean(Session["IsAdmin"])==false)
+                {
+                    <h2 style="color:orangered;">Welcome @Session["UserId"]</h2>                    <div style="color:blue; text-align:left;font-size:15px;font-style:italic;">Current Credits:@Session["Credits"]₪<hr></div>
+                }
+                else if (Session["UserId"] != null && Convert.ToBoolean(Session["IsAdmin"]) == true)
+                {
+                    <h2 style="color:blue;">Welcome Admin @Session["UserId"]</h2>     <div style="color:blue; text-align:left;font-size:15px; font-style:italic;">Current Credits:@Session["Credits"] ₪<hr /></div> 
+
+                }
+                else
+                {
+                    <h2>Welcome Guest,</h2>
+                }
+
+
+
+
+
+                <div class="crumb_navigation"> Navigation: <span class="current">Home</span> </div>
+                <div class="left_content">
+                    <div class="title_box">Categories</div>
+                    <ul class="left_menu">
+                        <li class="odd"><a href="http://localhost:7294/CBLogin/MyProfile">Edit Profile</a></li>
+                         <li class="even"><a href="http://localhost:7294">Home</a></li>
+                       <li class="odd"><a href="https://www.newegg.com/">Visit PcStore in USA</a></li>
+                        <li class="even"><a href="http://localhost:7294/CBLogin/ContactUs">Contact Us</a></li>
+                        <!-- <li class="odd"><a href="#">Processors</a></li>
+                        <li class="even"><a href="#">Motherboards</a></li>
+                        <li class="odd"><a href="#">Processors</a></li>
+                        <li class="even"><a href="#">Motherboards</a></li>
+                        <li class="odd"><a href="#">Desktops</a></li>
+                        <li class="even"><a href="#">Laptops &amp; Notebooks</a></li>
+                        <li class="odd"><a href="#">Processors</a></li>
+                       <li class="even"><a href="#">Motherboards</a></li>-->
+                    </ul>
+
+                </div>
+                <!-- end of left content -->
+                <div class="center_content">
+                    <div class="center_title_bar">Latest Products</div>
+                    @RenderBody()
+                   <!-- <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/laptop.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Iphone Apple</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p4.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p5.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/laptop.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Iphone Apple</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p4.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p5.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="center_title_bar">Recommended Products</div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Motorola 156 MX-VL</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/laptop.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Iphone Apple</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p4.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                    <div class="prod_box">
+                        <div class="top_prod_box"></div>
+                        <div class="center_prod_box">
+                            <div class="product_title"><a href="details.html">Samsung Webcam</a></div>
+                            <div class="product_img"><a href="details.html"><img src="/Content/electronix/images/p5.gif" alt="" border="0" /></a></div>
+                            <div class="prod_price"><span class="reduce">350$</span> <span class="price">270$</span></div>
+                        </div>
+                        <div class="bottom_prod_box"></div>
+                        <div class="prod_details_tab"> <a href="#" title="header=[Add to cart] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/cart.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Specials] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favs.gif" alt="" border="0" class="left_bt" /></a> <a href="#" title="header=[Gifts] body=[&nbsp;] fade=[on]"><img src="/Content/electronix/images/favorites.gif" alt="" border="0" class="left_bt" /></a> <a href="details.html" class="prod_details">details</a> </div>
+                    </div>
+                </div>
+                       -->
+                <!-- end of center content -->
+
+            </div>
+            <!-- end of main content -->
+            <div class="footer">
+                <div class="left_footer"> <img src="/Content/electronix/images/footer_logo.png" alt="" width="170" height="49" /> </div>
+                <div class="center_footer">
+                    Pc Store Mahdi&Elon<br /> All the rights reserved 2018<br />
+                    <a href="http://csscreme.com"><img src="/Content/electronix/images/csscreme.jpg" alt="csscreme" border="0" /></a><br />
+                    <img src="/Content/electronix/images/payment.gif" alt="" />
+                </div>
+                <div class="right_footer"> @if (Session["UserId"] != null)
+                {<a href="http://localhost:7294">home</a>}
+                else
+                {<a href="http://localhost:7294/Guest/Ghome">home</a> }<a href="#">about</a> <a href="#">sitemap</a> <a href="#">rss</a> <a href="http://localhost:7294/CBLogin/ContactUs">contact us</a> </div>
+            </div>
+        </div>
+            </div>
+        </div>
+        <!-- end of main_container -->
+</body>
+</html>
